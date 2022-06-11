@@ -1,0 +1,53 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'name'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch:
+          - x64
+        node-version:
+          - node16
+        os:
+          - linux
+          - macos
+          - win
+    steps:
+      - name: Setup
+        run: |
+          sudo apt update
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt -y install gnutls-bin git ca-certificates
+      - name: Checkout source repo
+        uses: actions/checkout@v3
+        with:
+          repository: 'JosteinKringlen/discord-music-bot'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Build
+        run: |
+          npm ci --production
+          npm cache clean --force
+          npm install
+          npm run build
+      - name: Package and upload
+        uses: lando/pkg-action@v2
+        with:
+          entrypoint: ./dist/index.js
+          arch: ${{ matrix.arch }}
+          node-version: ${{ matrix.node-version }}
+          os: ${{ matrix.os }}
+          options: -C GZip
