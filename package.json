@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prebundle": "npm run build && rimraf ./bin",
-    "bundle": "pkg . -t node16-macos-x64,node16-linux-x64,node16-win-x64 -o ./bin/discord-music-bot-v$npm_package_version -C GZip"
+    "bundle": "pkg package.json -o ./bin/discord-music-bot-v$npm_package_version -C GZip"
   },
   "author": "Jostein Kringlen",
   "repository": "github:JosteinKringlen/discord-music-bot",
@@ -49,5 +49,16 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
+  },
+  "pkg": {
+    "scripts": "./dist/**/*.js",
+    "assets": [
+      "./node_modules/@discordjs"
+    ],
+    "targets": [
+      "node16-macos-x64",
+      "node16-linux-x64",
+      "node16-win-x64"
+    ]
   }
 }
