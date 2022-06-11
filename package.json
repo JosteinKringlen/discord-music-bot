@@ -1,0 +1,53 @@
+{
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "nodemon",
+    "start": "node .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prebundle": "npm run build && rimraf ./bin",
+    "bundle": "pkg . -t node16-macos-x64,node16-linux-x64,node16-win-x64 -o ./bin/discord-music-bot-v$npm_package_version -C GZip"
+  },
+  "author": "Jostein Kringlen",
+  "repository": "github:JosteinKringlen/discord-music-bot",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.10.0",
+    "discord.js": "^13.8.0",
+    "discordjs-button-pagination": "^1.0.7",
+    "dotenv": "^16.0.1",
+    "libsodium-wrappers": "^0.7.10",
+    "play-dl": "^1.9.5",
+    "tiny-invariant": "^1.2.0",
+    "winston": "^3.7.2",
+    "ytsr": "^3.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "nodemon": "^2.0.16",
+    "pkg": "^5.7.0",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}
