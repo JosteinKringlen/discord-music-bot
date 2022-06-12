@@ -51,14 +51,10 @@
     "typescript": "4.7.3"
   },
   "pkg": {
-    "scripts": "./dist/**/*.js",
+    "scripts": "dist/**/*.js",
     "assets": [
-      "./node_modules/@discordjs"
+      "node_modules/"
     ],
-    "targets": [
-      "node16-macos-x64",
-      "node16-linux-x64",
-      "node16-win-x64"
-    ]
+    "outdir": "bin"
   }
 }
